@@ -12,8 +12,6 @@
 - [Installation](#installation)
 - [Dataset Preparation](#dataset-preparation)
 - [Usage](#usage)
-- [Results](#results)
-- [Citation](#citation)
 - [Acknowledgments](#acknowledgments)
 
 ### 📄 Overview
@@ -183,8 +181,6 @@ We thank the following works for their contributions:
 - [安装](#安装)
 - [数据集准备](#数据集准备)
 - [使用方法](#使用方法)
-- [结果](#结果)
-- [引用](#引用)
 - [致谢](#致谢)
 
 ### 📄 概述
