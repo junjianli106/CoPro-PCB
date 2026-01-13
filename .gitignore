@@ -1,0 +1,234 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Project specific
+# Data directories
+data/
+datasets/data/
+datasets/*/data/
+*.zip
+*.tar
+*.tar.gz
+
+# Logs and outputs
+all_logs/
+logs/
+outputs/
+results/
+*.log
+*.out
+
+# Model checkpoints and weights
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.pb
+*.onnx
+*.pkl
+*.pickle
+checkpoints/
+models/
+weights/
+pretrained/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+
+# Large files (vocab files, etc.)
+*.gz
+!CoPro/CLIPAD/bpe_simple_vocab_16e6.txt.gz  # Keep this if needed for the project
+
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Experiment tracking
+wandb/
+tensorboard/
+runs/
+mlruns/
+
+# Seeds and selected samples (if they are generated)
+# Uncomment if you don't want to track seed files
+# datasets/seeds_*/
+# datasets/*/seeds_*/
+
+# Code backup files
+old*.py
+*_old.py
+*_backup.py
+
+# CSV results (if generated)
+*.csv
+!requirements.csv  # Keep if you have a requirements CSV
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Large dataset files
+*.npy
+*.npz
+*.hdf5
+*.h5
+
+# Image files (if too large, uncomment)
+# *.jpg
+# *.png
+# *.jpeg
+# *.bmp
+# *.tiff
+
+# Video files
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Audio files
+*.wav
+*.mp3
+
+# Compressed files
+*.7z
+*.rar
+
+__pycache__
+.idea
