@@ -473,7 +473,7 @@ def get_args():
     # mixed precision training
     parser.add_argument("--use-amp", type=str2bool, default=True, help="Use mixed precision training (fp16) for acceleration")
     # warmup epochs (skip testing during warmup)
-    parser.add_argument("--warmup-epochs", type=int, default=40, help="Number of warmup epochs before starting testing")
+    parser.add_argument("--warmup-epochs", type=int, default=10, help="Number of warmup epochs before starting testing")
     args = parser.parse_args()
 
     return args

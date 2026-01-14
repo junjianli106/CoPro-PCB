@@ -1,20 +1,3 @@
-# # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# # SPDX-License-Identifier: Apache-2.0
-# '''
-# 1.
-# glob.glob(pcb_reallad\NG\*\*\*.jpg)为所有缺陷图片路径
-# glob.glob(pcb_reallad\NG\*\*\*.png)为所有缺陷图片ground_truth路径
-# glob.glob(pcb_reallad\OK\*\*\.jpg)为所有正常图片路径
-#
-# 2.
-# /home/junjianli/PromptAD/data/RealLAD_pytorch/1cls/pcb/train/good保存训练集的正常图片
-# /home/junjianli/PromptAD/data/VisA_pytorch/1cls/pcb1/test/good/ 保存测试集的正常图片
-# /home/junjianli/PromptAD/data/VisA_pytorch/1cls/pcb1/test/bad/ 保存测试集的缺陷图片
-# /home/junjianli/PromptAD/data/VisA_pytorch/1cls/pcb1/ground_truth/bad/ 保存测试集的缺陷图片的ground_truth（png结尾）
-#
-# 3. 将正常图片分为两部分，一部分作为训练集，一部分作为测试集。异常图片作为测试集，同时保存ground_truth（异常图片保存的时候要查看是否存在ground_truth（同名字，png结尾））
-# '''
-
 import os
 import shutil
 import glob
@@ -27,8 +10,8 @@ def _mkdirs_if_not_exists(path):
         os.makedirs(path)
 
 # Define the paths
-data_folder = '/home/lijunjian/PromptAD/data/RealLAD'
-save_folder = '/home/lijunjian/PromptAD/data/RealLAD_pytorch/1cls'
+data_folder = '/path/to/data/RealLAD'
+save_folder = '/path/to/data/RealLAD_pytorch/1cls'
 train_good_folder = os.path.join(save_folder, 'pcb_reallad', 'train', 'good')
 test_good_folder = os.path.join(save_folder, 'pcb_reallad', 'test', 'good')
 test_bad_folder = os.path.join(save_folder, 'pcb_reallad', 'test', 'bad')

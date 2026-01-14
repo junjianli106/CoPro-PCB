@@ -30,14 +30,12 @@ def create_transform(img_resize, img_cropsize):
     ])
 
 load_function_dict = {
-    'mvtec': load_mvtec,
     'visa': load_visa,
     'deeppcb': load_deeppcb,
     'reallad': load_reallad
 }
 
 dataset_classes = {
-    'mvtec': mvtec_classes,
     'visa': visa_classes,
     'deeppcb': deeppcb_classes,
     'reallad': reallad_classes
@@ -101,9 +99,5 @@ def get_dataloader_from_args(phase, **kwargs):
             persistent_workers=True,  # 减少worker启动开销
             prefetch_factor=2  # 预取更多数据
         )
-
-
-    # debug_str = f"===> datasets: {kwargs['dataset']}, class name/len: {kwargs['class_name']}/{len(dataset_inst)}, batch size: {kwargs['batch_size']}"
-    # # logger.info(debug_str)
 
     return data_loader, dataset_inst

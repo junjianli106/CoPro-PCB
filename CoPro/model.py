@@ -232,7 +232,9 @@ class CoPro(torch.nn.Module):
         self.visual_gallery = None
         self.memory_bank_size=self.bank_size
         ## memory_bank(named queue) in order to store abnormal text emebedings 
-        #144000
+        # For classification: 640 (CLS token feature dim)
+        # For segmentation: 144000 (225 * 640, flattened patch features)
+        # We use 144000 to support both, but for classification we only use the first 640 dims
         self.register_buffer('queue',torch.randn(self.shot,self.memory_bank_size,144000))
         ## ptr to memorybank
         self.register_buffer("queue_ptr", torch.zeros(1, dtype=torch.long))
@@ -272,13 +274,52 @@ class CoPro(torch.nn.Module):
     @torch.no_grad()
     def enqueue(self,abnormal_features):
         ptr = int(self.queue_ptr)
-        self.queue[:, ptr + 1: ] = abnormal_features.reshape(self.shot,1,-1)
+        # abnormal_features shape: [batch_size, 640] or [640] for classification (CLS token)
+        # Handle both 1D and 2D input
+        if abnormal_features.dim() == 1:
+            abnormal_features = abnormal_features.unsqueeze(0)  # [1, 640]
+        
+        batch_size, feat_dim = abnormal_features.shape
+        # Ensure we have exactly self.shot samples
+        if batch_size < self.shot:
+            # Repeat if we have fewer samples than shot
+            abnormal_features = abnormal_features.repeat(self.shot, 1)
+        elif batch_size > self.shot:
+            # Take first shot samples if we have more
+            abnormal_features = abnormal_features[:self.shot]
+        
+        # Reshape to [shot, 1, feat_dim]
+        reshaped = abnormal_features.reshape(self.shot, 1, feat_dim)  # [shot, 1, 640]
+        
+        # Pad to match queue feature dimension (144000)
+        padded = torch.zeros(self.shot, 1, 144000, dtype=reshaped.dtype, device=reshaped.device)
+        padded[:, :, :feat_dim] = reshaped
+        self.queue[:, ptr:ptr+1] = padded
+        
         ptr = (ptr + 1) % self.memory_bank_size
         self.queue_ptr[0] = ptr
     @torch.no_grad()
     def enqueue_seg(self,abnormal_features):
         ptr = int(self.queue_ptr)
-        self.queue[:, ptr + 1: ] = abnormal_features.reshape(self.shot,1,-1)
+        # abnormal_features shape: [batch_size, 225, 640] for segmentation (patch features)
+        # Flatten to [batch_size, 144000] and reshape to [shot, 1, 144000]
+        if abnormal_features.dim() == 3:
+            # [batch_size, 225, 640] -> [batch_size, 144000]
+            abnormal_features = abnormal_features.reshape(abnormal_features.shape[0], -1)
+        elif abnormal_features.dim() == 2:
+            # Already flattened [batch_size, 144000]
+            pass
+        else:
+            raise ValueError(f"Unexpected feature dimension: {abnormal_features.dim()}")
+        
+        batch_size = abnormal_features.shape[0]
+        if batch_size < self.shot:
+            abnormal_features = abnormal_features.repeat(self.shot, 1)
+        elif batch_size > self.shot:
+            abnormal_features = abnormal_features[:self.shot]
+        
+        reshaped = abnormal_features.reshape(self.shot, 1, -1)  # [shot, 1, 144000]
+        self.queue[:, ptr:ptr+1] = reshaped
         ptr = (ptr + 1) % self.memory_bank_size
         self.queue_ptr[0] = ptr
     @torch.no_grad()
@@ -309,17 +350,20 @@ class CoPro(torch.nn.Module):
         if self.shot>1:
             for i in range(self.shot):
                 samepic_feature = self.queue[i]
-                samepic_score=criterion_tip(samepic_feature,ab_ahchor,n_ahchor)
-                samepic_res.append(samepic_feature[torch.argmax(samepic_score)].unsqueeze(0))
+                # Extract only the first 640 dims for classification
+                samepic_feature_640 = samepic_feature[:, :640]
+                samepic_score=criterion_tip(samepic_feature_640,ab_ahchor,n_ahchor)
+                samepic_res.append(samepic_feature_640[torch.argmax(samepic_score)].unsqueeze(0))
                 differentpic_feature = torch.cat([self.queue[:i],self.queue[i+1:]],dim=0)
-                differentpic_feature = differentpic_feature.reshape(-1,640)
+                differentpic_feature = differentpic_feature.reshape(-1,144000)[:, :640]  # Extract first 640 dims
                 differentpic_score=criterion_tip(differentpic_feature,ab_ahchor,n_ahchor)
                 differentpic_res.append(differentpic_feature[torch.argmax(differentpic_score.squeeze(0))].unsqueeze(0))
 
             return torch.cat(samepic_res),torch.cat(differentpic_res)
         else :
-            samepic_score=criterion_tip(self.queue.squeeze(0),ab_ahchor,n_ahchor)
-            return self.queue[:,torch.argmax(samepic_score),:] 
+            samepic_feature_640 = self.queue.squeeze(0)[:, :640]  # Extract first 640 dims
+            samepic_score=criterion_tip(samepic_feature_640,ab_ahchor,n_ahchor)
+            return self.queue[:,torch.argmax(samepic_score),:640]  # Return only first 640 dims
     
     @torch.no_grad()
     def encode_image(self, image: torch.Tensor):

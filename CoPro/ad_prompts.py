@@ -1,4 +1,5 @@
 
+
 class_mapping = {
     "macaroni1": "macaroni",
     "macaroni2": "macaroni",
@@ -23,33 +24,54 @@ state_anomaly = ["damaged {}",
 
 abnormal_state0 = ['damaged {}', 'broken {}', '{} with flaw', '{} with defect', '{} with damage']
 
-#
-class_state_abnormal = {
-    'bottle': ['{} with large breakage', '{} with small breakage', '{} with contamination'],
-    'toothbrush': ['{} with defect', '{} with anomaly'],
-    'carpet': ['{} with hole', '{} with color stain', '{} with metal contamination', '{} with thread residue', '{} with thread', '{} with cut'],
-    'hazelnut': ['{} with crack', '{} with cut', '{} with hole', '{} with print'],
-    'leather': ['{} with color stain', '{} with cut', '{} with fold', '{} with glue', '{} with poke'],
-    'cable': ['{} with bent wire', '{} with missing part', '{} with missing wire', '{} with cut', '{} with poke'],
-    'capsule': ['{} with crack', '{} with faulty imprint', '{} with poke', '{} with scratch', '{} squeezed with compression'],
-    'grid': ['{} with breakage',  '{} with thread residue', '{} with thread', '{} with metal contamination', '{} with glue', '{} with a bent shape'],
-    'pill': ['{} with color stain', '{} with contamination', '{} with crack', '{} with faulty imprint', '{} with scratch', '{} with abnormal type'],
-    'transistor': ['{} with bent lead', '{} with cut lead', '{} with damage', '{} with misplaced transistor'],
-    'metal_nut': ['{} with a bent shape ', '{} with color stain', '{} with a flipped orientation', '{} with scratch'],
-    'screw': ['{} with manipulated front',  '{} with scratch neck', '{} with scratch head'],
-    'zipper': ['{} with broken teeth', '{} with fabric border', '{} with defect fabric', '{} with broken fabric', '{} with split teeth', '{} with squeezed teeth'],
-    'tile': ['{} with crack', '{} with glue strip', '{} with gray stroke', '{} with oil', '{} with rough surface'],
-    'wood': ['{} with color stain', '{} with hole', '{} with scratch', '{} with liquid'],
 
-    'candle': ['{} with melded wax', '{} with foreign particals', '{} with extra wax', '{} with chunk of wax missing', '{} with weird candle wick', '{} with damaged corner of packaging', '{} with different colour spot'],
-    'capsules': ['{} with scratch', '{} with discolor', '{} with misshape', '{} with leak', '{} with bubble'],
-    'cashew': ['{} with breakage', '{} with small scratches', '{} with burnt', '{} with stuck together', '{} with spot'],
-    'chewinggum': ['{} with corner missing', '{} with scratches', '{} with chunk of gum missing', '{} with colour spot', '{} with cracks'],
-    'fryum': ['{} with breakage', '{} with scratches', '{} with burnt', '{} with colour spot', '{} with fryum stuck together', '{} with colour spot'],
-    'macaroni1': ['{} with color spot', '{} with small chip around edge', '{} with small scratches', '{} with breakage', '{} with cracks'],
-    'macaroni2': ['{} with color spot', '{} with small chip around edge', '{} with small scratches', '{} with breakage', '{} with cracks'],
-    'pcb1': ['{} with bent', '{} with scratch', '{} with missing', '{} with melt'],
-    'pcb2': ['{} with bent', '{} with scratch', '{} with missing', '{} with melt'],
-    'pcb3': ['{} with bent', '{} with scratch', '{} with missing', '{} with melt'],
-    'pcb4': ['{} with scratch', '{} with extra', '{} with missing', '{} with wrong place', '{} with damage', '{} with burnt', '{} with dirt'],
-    'pipe_fryum': ['{} with breakage', '{} with small scratches', '{} with burnt', '{} with stuck together', '{} with colour spot', '{} with cracks']}
+class_state_abnormal = {
+    # 示例：pcb_reallad
+    'pcb_reallad': [
+        '{} with thin, irregular grooves or abrasions visible on the surface',
+        '{} with noticeable gaps or empty spaces where components should be',
+        '{} with small, extraneous particles or debris scattered on the board',
+        '{} with visible stains, smudges, or discolorations on the surface'
+    ],
+    # 示例：pcb
+    'pcb': [
+        '{} with open: A noticeable white gap appears in the black trace, where the line is no longer continuous, creating an abrupt linear break.',
+        '{} with short: Two originally unconnected black traces unexpectedly form a black bridge, resulting in an irregular black region connecting the lines.',
+        '{} with mousebite: The edge of the black trace shows irregular white indentations, presenting a serrated or semicircular notch, as if the trace has been bitten.',
+        '{} with spur: Small black protrusions extend from the edge of the black trace, appearing as thin, sharp spikes, resembling burrs branching off the main trace.',
+        '{} with pin: An isolated small black circular dot or spot appears in what should be a white background, with a clear isolated nature, like a residual metal pin.',
+        '{} with hole: A white circular or elliptical gap appears in the black trace or copper region, forming a noticeable hole surrounded by black lines.',
+        '{} with spurious copper: Irregular black spots or block-like regions appear in the white area, indicating excess copper, with abnormal shape and placement.'
+    ],
+    # 示例：pcb1
+    "pcb1": [
+    "{} with bent: The PCB exhibits bent white pins on the underside, resulting in misalignment or improper connections.",
+    "{} with scratch: The surface displays scratches or burrs, appearing as linear marks or rough edges.",
+    "{} with missing: The PCB has areas where material is missing, such as specific functional regions like pads, traces, or pins.",
+    "{} with melt: The surface shows signs of melting, typically due to solder reflow, presenting irregular boundaries and rough textures."
+  ],
+    # 示例：pcb2
+    'pcb2': [
+    "{} with bent: The PCB exhibits bent white pins on the underside, resulting in misalignment or improper connections.",
+    "{} with scratch: The surface displays scratches or burrs, appearing as linear marks or rough edges.",
+    "{} with missing: The PCB has areas where material is missing, such as specific functional regions like pads, traces, or pins.",
+    "{} with melt: The surface shows signs of melting, typically due to solder reflow, presenting irregular boundaries and rough textures."
+  ],
+    # 示例：pcb3
+    'pcb3': [
+    "{} with bent: The PCB exhibits bent white pins on the underside, resulting in misalignment or improper connections.",
+    "{} with scratch: The surface displays scratches or burrs, appearing as linear marks or rough edges.",
+    "{} with missing: The PCB has areas where material is missing, such as specific functional regions like pads, traces, or pins.",
+    "{} with melt: The surface shows signs of melting, typically due to solder reflow, presenting irregular boundaries and rough textures."
+  ],
+    # 示例：pcb4
+    "pcb4": [
+        "{} with scratch: The surface displays scratches or burrs, appearing as elongated linear marks or rough edges. ",
+        "{} with extra: The PCB contains extraneous materials or components, such as excess solder forming silver-white bridges between traces, or foreign objects with distinct colors on the board.",
+        "{} with missing: The PCB has areas where material is missing, such as specific functional regions like pads, traces, or pins.",
+        "{} with wrong place: Components or materials are incorrectly positioned on the PCB, appearing misaligned or shifted. ",
+        "{} with damage: The PCB exhibits signs of physical damage, such as cracks, dents, or delamination.",
+        "{} with burnt: The PCB has burnt areas, characterized by visible discoloration in black, brown, or scorched yellow shades. These areas may also show signs of charring or soot deposition.",
+        "{} with dirt: The PCB surface is contaminated with dirt, dust, or other foreign particles, appearing as black, gray, or brown spots or grainy deposits adhering to the surface."
+    ]
+}

@@ -4,7 +4,7 @@ import random
 
 reallad_classes = ['pcb_reallad']
 
-RealLAD_DIR = '/mnt/NVMe_1T/PCB/PCBPromptADLJJ/data/RealLAD_pytorch/1cls/'
+RealLAD_DIR = '//path/to/data/RealLAD_pytorch/1cls/'
 
 
 def load_reallad(category, k_shot, seed):

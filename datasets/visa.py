@@ -6,7 +6,7 @@ visa_classes = ['candle', 'capsules', 'cashew', 'chewinggum',
                 'fryum', 'macaroni1', 'macaroni2',
                 'pcb1', 'pcb2', 'pcb3', 'pcb4', 'pipe_fryum']
 
-VISA_DIR = '/mnt/NVMe_1T/PCB/PromptADKWY/data/VisA_pytorch/1cls'
+VISA_DIR = '/path/to/data/VisA_pytorch/1cls'
 
 def load_visa(category, k_shot, seed):
     def load_phase(root_path, gt_path):

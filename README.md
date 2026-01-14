@@ -186,7 +186,7 @@ We thank the following works for their contributions:
 #### 环境要求
 
 - Python 3.10
-- 支持 CUDA 的 GPU（推荐）
+- CUDA 环境 12.2
 - Conda（推荐）
 
 #### 安装步骤

@@ -73,18 +73,12 @@ class CLIPDataset(Dataset):
                     # resize后重新二值化，因为resize可能产生中间值
                     gt = (gt > 127).astype(np.uint8) * 255
 
-        # 移除冗余的1024x1024 resize，让transform直接处理原始图像
-        # transform中已经包含Resize操作，避免重复resize
         img_name = f'{self.category}-{img_type}-{os.path.basename(img_path[:-4])}'
 
-        # 如果提供了transform，应用预处理
         if self.transform is not None:
-            # 转换BGR到RGB并应用transform（transform中会进行resize）
             img_pil = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
             img = self.transform(img_pil)
-            
-            # GT mask也需要同步resize到相同的尺寸（img_cropsize x img_cropsize）
-            # 手动应用与图像相同的Resize和CenterCrop操作
+
             from PIL import Image as PILImage
             gt_pil = PILImage.fromarray(gt, mode='L')
             if self.img_resize is not None and self.img_cropsize is not None:
@@ -99,7 +93,6 @@ class CLIPDataset(Dataset):
                 gt_pil = gt_pil.crop((left, top, right, bottom))
                 # 转换回numpy array
                 gt = np.array(gt_pil, dtype=np.uint8)
-                # 重新二值化（确保是0或255）
                 gt = (gt > 127).astype(np.uint8) * 255
 
         return img, gt, label, img_name, img_type
@@ -108,7 +101,6 @@ class CLIPDataset(Dataset):
 # PCB区域自动检测
 def detect_pcb_region(img, padding=10):
     """自动检测PCB主要区域"""
-    # 转换为灰度图并进行边缘检测
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     edges = cv2.Canny(gray, 50, 150)
 
@@ -303,8 +295,6 @@ class CLIPDatasetWAnom(Dataset):
                     # resize后重新二值化
                     gt = (gt > 127).astype(np.uint8) * 255
 
-        # 移除冗余的1024x1024 resize，让transform直接处理原始图像
-        # transform中已经包含Resize操作，避免重复resize
         img_name = f'{self.category}-{img_type}-{os.path.basename(img_path[:-4])}'
 
         # 如果提供了transform，应用预处理

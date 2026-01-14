@@ -4,7 +4,7 @@ import random
 
 deeppcb_classes = ['pcb']
 
-DeepPCB_DIR = '/mnt/NVMe_1T/PCB/PromptADKWY/data/DeepPCB_pytorch/1cls'
+DeepPCB_DIR = '/path/to/data/DeepPCB_pytorch/1cls'
 
 
 def load_deeppcb(category, k_shot, seed):
