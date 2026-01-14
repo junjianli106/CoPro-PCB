@@ -3,16 +3,7 @@
 [English](#english) | [中文](#中文)
 
 
-## English {#english}
-
-### 📋 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Dataset Preparation](#dataset-preparation)
-- [Usage](#usage)
-- [Acknowledgments](#acknowledgments)
+## English 
 
 ### 📄 Overview
 
@@ -57,7 +48,7 @@ conda create -n copro python==3.10
 conda activate copro
 
 # Install dependencies
-bash install.sh
+pip install -r requirements.txt
 ```
 
 ### 📊 Dataset Preparation
@@ -172,16 +163,7 @@ We thank the following works for their contributions:
 
 ---
 
-## 中文 {#中文}
-
-### 📋 目录
-
-- [概述](#概述)
-- [特性](#特性)
-- [安装](#安装)
-- [数据集准备](#数据集准备)
-- [使用方法](#使用方法)
-- [致谢](#致谢)
+## 中文 
 
 ### 📄 概述
 
@@ -215,7 +197,7 @@ conda create -n copro python==3.10
 conda activate copro
 
 # 安装依赖
-bash install.sh
+pip install -r requirements.txt
 ```
 
 ### 📊 数据集准备
